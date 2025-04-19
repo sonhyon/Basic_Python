@@ -64,3 +64,18 @@ t1*2 #튜플 곱하기
 lent(t1) #튜플 길이 구하기
 
 #딕셔너리 자료형 : Key를 통해 Value를 얻는다
+dic = ('name':'pey', 'phone':'010-9999-1234', 'birth':'1118'}
+dic[4] = 'd' #딕셔너리 쌍 추가하기
+del dic[4] #딕셔너리 삭제하기
+
+dic['name'] #Key를 통해 Value얻기
+#주의사항
+- Key값이 중복이면 안됨
+- Key에 리스트는 쓸 수 없다
+
+dic,keys() #Key로만 이루어진 리스트 만들기
+-> list(dic.keys()) #완전한 리스트로 변환
+dic.values() #Value로만 이루어진 리스트 만들기
+dic.items() #Key, Value 쌍으로 얻기
+dic.clear() #Key, Value 모두 지우기
+dic.get('name') #Key를 통해 Value얻기
