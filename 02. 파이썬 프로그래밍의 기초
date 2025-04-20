@@ -73,7 +73,7 @@ dic['name'] #Key를 통해 Value얻기
 - Key값이 중복이면 안됨
 - Key에 리스트는 쓸 수 없다
 
-dic,keys() #Key로만 이루어진 리스트 만들기
+dic.keys() #Key로만 이루어진 리스트 만들기
 -> list(dic.keys()) #완전한 리스트로 변환
 dic.values() #Value로만 이루어진 리스트 만들기
 dic.items() #Key, Value 쌍으로 얻기
@@ -81,3 +81,34 @@ dic.clear() #Key, Value 모두 지우기
 dic.get('name') #Key를 통해 Value얻기
 dic.get('nokey', 'foo') #딕셔너리 안에 찾으려는 key가 없을 경우, 디폴트 값을 미리 정하기
 'name' in dic #해당 Key가 딕셔너리 안에 있는지 조사
+
+#집합 자료형
+s1 = set([1,2,3]) #리스트 입력
+s2 = set("Hello") #문자열 입력
+*집합 자료형 특징: 중복을 허용하지 않는다, 순서가 없다->인덱싱 x
+
+s1 & s2 #교집합 구하기
+s1 | s2 #합집합 구하기
+s1.union(s2)
+s1 - s2 #차집합 구하기
+s1.difference(s2)
+s1.add(4) #값 1개 추가하기
+s1.update([4,5,6]) #값 여러 개 추가하기
+s1.remove(2) #특정 값 제거하기
+
+#불 자료형 : True, False
+type() #자료형 확인 가능
+bool('python') #-> True
+bool('') #-> False
+
+#리스트 복사
+a = [1,2,3]
+b = a[:] #리스트 a의 처음 요소부터 끝 요소까지 슬라이싱
+
+from copy import copy
+a = [1,2,3]
+b = copy(a)
+or
+b = a.copy()
+
+a, b = b, a #a와 b의 값을 바꿈
