@@ -26,3 +26,28 @@ else:
   print("카드를 꺼내라")
 
 pocket = ['paper', 'cellphone']
+card = True
+if 'money' in pocket:
+  print("택시를 타고 가라")
+else:
+  if card:
+    print("택시를 타도 가라")
+  else:
+    print("걸어가라")
+
+pocket = ['paper', 'cellphone'] #elif를 사용
+card = True
+if 'money' in pocket:
+  print("택시를 타고 가라")
+elif card: 
+  print("택시를 타고 가라")
+else:
+  print("걸어가라")
+
+#조건부 표현식
+if score >= 60:
+  message = "success"
+else:
+  message = "failure"
+
+message = "success" if score >= 60 else "failure" #간단하게 조건식을 표현 가능
