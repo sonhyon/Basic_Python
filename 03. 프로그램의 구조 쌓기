@@ -1,0 +1,28 @@
+비교연산자 : <, >, ==, !=, >=, <=
+연산자 : or, and, not
+
+#조건문
+money = 2000
+if money >= 3000:
+  print("택시를 타고 가라")
+else:
+  print("걸어가라")
+
+# in
+x in 리스트
+x in 튜플
+x in 문자열
+
+pocket = ['paper', 'cellphone', 'money']
+if 'money' in pocket:
+  print("택시를 타고 가라")
+else:
+  print("걸어가라")
+
+pocket = ['paper', 'cellphone', 'money']
+if 'money' in pocket:
+  pass #아무런 일도 하지 않도록 설정
+else:
+  print("카드를 꺼내라")
+
+pocket = ['paper', 'cellphone']
