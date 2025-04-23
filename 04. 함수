@@ -1,0 +1,14 @@
+#입력값과 리턴값에 따른 함수의 형태
+
+def add(a, b): #일반적인 함수 형태
+  result = a + b
+  return result
+
+def say() #입력값이 없는 함수
+  return 'hi'
+
+def add(a, b): #리턴값이 없는 함수
+  print("%d, %d의 합은 %d입니다" % (a, b, a+b)) 
+
+def say(): #입력값, 리턴값 둘 다 없는 함수
+  print('hi') 
