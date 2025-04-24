@@ -12,3 +12,41 @@ def add(a, b): #리턴값이 없는 함수
 
 def say(): #입력값, 리턴값 둘 다 없는 함수
   print('hi') 
+
+#매개변수를 지정해 호출하기
+def sub(a, b):
+  return a-b
+result = sub(a=7, b=3)
+print(result)
+
+#입력값이 몇 개가 될지 모를 때
+def add_many(*args): #매개변수에 *을 붙이면 입력값을 전부 모아 튜플을 만들어준다
+  result = 0
+  for i in args:
+    result = result + i
+  return result
+
+def add_maul(choice, *args):
+  if choice == "add":
+    result = 0
+    for i in args:
+      result = result + 1
+  elif choice == "mul":
+    result = 1
+    for i in args:
+      result = result * i
+  return result
+
+#키워드 매개변수, kwargs
+def print_kwargs(**kwargs): #kwargs는 딕셔너리가 되고, Key=Value 형태의 입력값이 그 딕셔너리에 저장된다
+  print(kwargs)
+
+#함수의 리턴값은 언제나 하나다
+def add_and_mul(a, b):
+  return a+b, a*b #튜플값으로 (a+b, a*b)로 리턴된다
+
+*특별한 상활일 때 return을 단독으로 써서 함수를 즉시 빠져나갈 수 있다
+def say_nick(nick):
+  if nick == "바보":
+    return #바보 입력시 return문이 실행되어 함수를 빠져나온다
+  print("나의 별명은 %s입니다" % nick)
