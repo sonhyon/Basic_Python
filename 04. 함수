@@ -88,3 +88,15 @@ print(a)
 add = lambda a, b: a+b
 result = add(3,4)
 print(result)
+
+#사용자 입출력
+a = input()
+number = input("숫자를 입력하세요: ")
+
+print("Life" "is" "too short") #큰따옴표로 둘러싸인 문자열은 +연산과 동일하다
+print("Life"+"is"+"too short") 
+
+print("Life", "is", "too short") #문자열 띄어쓰기는 쉼표로 한다
+
+for i in range(10):
+  print(i, end=' ') #한 줄에 결과값 출력하기
