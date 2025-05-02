@@ -20,3 +20,11 @@ a.add() #덧셈
 a.mul() #곱
 a.sub() #뺄셈
 a.div() #나누기
+
+class FourCal:
+  def setdata(self, first, second):
+      self.first = first
+      self.second = second
+
+a.setdata(4, 2)
+a.frist
