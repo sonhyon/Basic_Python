@@ -65,3 +65,11 @@ b = FourCal()
 a.setdata(4, 2)
 b.setdata(3, 8)
 
+#생성자 : 객체가 생성될 때 자동으로 호출되는 메서드를 의미
+class FourCal:
+  def __init__(self, first, second):
+      self.first = first
+      self.second = second
+*__init__메서드는 setdata 메서드와 이름만 다르고 모든 게 동일하다
+
+
