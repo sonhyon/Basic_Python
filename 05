@@ -72,4 +72,13 @@ class FourCal:
       self.second = second
 *__init__메서드는 setdata 메서드와 이름만 다르고 모든 게 동일하다
 
+#클래스의 상속
+class MoreFourCal(FourCal):
+  pass
+
+a = MoreFourCal(4,2)
+a.add() #상속받은 FourCal 클래스의 기능을 모두 사용할 수 있다
+a.mul()
+a.sub()
+a.div()
 
