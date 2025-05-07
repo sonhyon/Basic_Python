@@ -82,3 +82,10 @@ a.mul()
 a.sub()
 a.div()
 
+class MoreFourCal(FourCal):
+  def pow(self):
+    result = self.first ** self.second
+    return result
+
+a = MoreFourCal(4,2)
+a.pow()
