@@ -131,3 +131,35 @@ from mod1 import *           #mod1 모듈의 모든 함수를 불러와 사용�
 
 # if__name__=="__main__":의 의미
 if__name__=="__main__"을 사용하면 직접 파일을 실행했을 때는 __name__=="__main__"이 참이 되어 if문 다음 문장이 수행된다
+
+#클래스나 변수 등을 포함한 모듈
+PI = 3.141592
+
+class Math:
+  def solv(self, r):
+    return PI * (r ** 2)
+
+def add(a, b):
+  return a + b
+
+#다른 파일에서 모듈 불러오기
+import mod2
+result = mod2.add(3,4)
+print(result)
+*위 예제가 정상적으로 실행되기 위해서는 modtest.py 파일과 mod2.py 파일이 동일한 디렉터리에 있어야 한다
+
+#다른 디렉터리에 있는 모듈을 불러오는 방법
+#sys.path.append 사용하기
+import sys #파이썬 라이브러리가 설치되어 있는 디렉터리를 확인할 수 있다
+sys.path #디렉터리 목록을 보여준다
+sys.path.append("C:/doit/mymod")
+sys.path
+
+import mod2
+print(mod2.add(3,4))
+
+#PYTHONPATH 환경 변수 사용하기
+C:\doit>set PYTHONPATH=C:\doit\mymod
+C:\doit>python
+import mod2
+print(mod2.add(3,4))
