@@ -163,3 +163,42 @@ C:\doit>set PYTHONPATH=C:\doit\mymod
 C:\doit>python
 import mod2
 print(mod2.add(3,4))
+
+[패키지]
+#가상의 game 패키지 예
+game/
+  __init__.py
+  sound/
+    __init__.py
+    echo.py
+    wav.py
+  graphic/
+    __init__.py
+    screen.py
+    render.py
+  play/
+    __init__.py
+    run.py
+    test.py
+
+#패키지 만들기
+1. 디렉터리 밑에 game 및 기타 서브 디렉터리를 생성하고 .py파일들을 다음과 같이 만들기
+c:/doit/game/__init__.py
+c:/doit/game/sound/__init__.py
+c:/doit/game/sound/echo.py
+c:/doit/game/graphic/__init__.py
+c:/doit/game/graphic/render.py
+
+2. 각 디렉터리에 __init__.py파일을 만들어 놓기
+
+3. echo.py 파일의 내용은 다음과 같이 작성
+def echo_test():
+  print("echo")
+
+4. render.py 파일의 내용은 다음과 같이 작성
+def render_test():
+  print("render")
+
+5. 명령 프롬프트 창에서 set 명령어로 PYTHONPATH 환경 변수에 디렉터리를 추가
+C:\>set PYTHONPATH=C:/doit
+C:\>python
