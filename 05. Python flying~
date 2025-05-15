@@ -202,3 +202,45 @@ def render_test():
 5. 명령 프롬프트 창에서 set 명령어로 PYTHONPATH 환경 변수에 디렉터리를 추가
 C:\>set PYTHONPATH=C:/doit
 C:\>python
+
+#패키지 안의 함수 실행하기
+
+#__init__.py의 용도
+
+#패키지 변수 및 함수 정의
+VERSION = 3.5
+
+def print_version_info():
+  print(f"The version of this game is {VERSION}.")
+
+#패키지 내 모듈을 미리 import
+from .graphic.render import render_test
+
+VERSION = 3.5
+
+def print_version_info():
+  print(f"The version of this game is {VERSION}.")
+
+#패키지 초기화
+from .graphic.render import render_test
+
+VERSION = 3.5
+
+def print_version_info():
+  print(f"The version of this game is {VERSION}.")
+
+*여기에 패키지 초기화 코드를 작성한다
+print("INitializing game ...")
+
+#__all__
+
+#relative 패키지
+from game.sound.echo import echo_test
+def render_test():
+  print("render")
+  echo_test()
+
+from ..sound.echo import echo_test
+def render_test():
+  print("render")
+  echo_test()
