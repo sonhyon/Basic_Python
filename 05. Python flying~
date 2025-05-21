@@ -391,3 +391,39 @@ taple() #튜플로 바꾸어 리턴
 type() #자료형이 무엇인지 알려주는 함수
 zip() #동일한 개수로 이루어진 데이터들을 묶어서 리턴
 
+
+[표준 라이브러리]
+#datetime.date
+import datetime
+day1 = datetime.date(2021, 12, 14)
+day2 = datetime.date(2023, 4, 5)
+
+diff = day2 - day1
+diff.days
+
+day = datetime.date(2021, 12, 14)
+day.weekday()
+
+day.isoweekday() #요일
+
+#time
+time.time()
+time.localtime()
+time.asctime()
+time.ctime()
+time.strftime()
+time.sleep()
+
+#math.gcd
+math.gcd() #최대공약수
+math.lcm() #최소공배수
+random() #난수 생성
+
+#itertools.zip_longest
+#itertools.permutation
+#itertools.combination
+#functools.reduce
+#operator.itemgetter
+#shutil
+#glob
+#pickle
