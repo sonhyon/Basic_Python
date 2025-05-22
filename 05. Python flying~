@@ -427,3 +427,18 @@ random() #난수 생성
 #shutil
 #glob
 #pickle
+
+#os
+내 시스템의 환경 변숫값을 알고 싶을 때 - os.environ
+디렉터리 위치 변경하기 - os.chdir
+디렉터리 위치 돌려받기 - os.getcwd
+시스템 명령어 호출하기 - os.system 
+실행한 시스템 명령어의 결괏값 돌려받기 - os.popen
+
+#zipfile
+#threading
+#tempfile
+#traceback
+#json
+#urllib
+#webbrowser
