@@ -442,3 +442,12 @@ random() #난수 생성
 #json
 #urllib
 #webbrowser
+
+
+[외부 라이브러리]
+#pip install
+#pip uninstall
+- 특정 버전으로 설치하기
+- 최신 버전으로 업그레이드하기
+- 설치된 패키지 확인하기
+#Faker
