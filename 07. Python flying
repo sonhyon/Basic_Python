@@ -32,3 +32,5 @@ data = data + "\n" + "추가 문자열"
 3. euc-kr로 수정된 문자열 저장하기
 with open('euc-kr.txt', encoding = 'euc-kr', mode = 'w') as f:
   f.write(data)
+
+- 소스 코드의 인코딩
