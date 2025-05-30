@@ -1,0 +1,34 @@
+[파이썬과 유니코드]
+#최초의 문자 셋, 아스키코드
+#유니코드의 등장
+#유니코드로 문자열 다루기
+- 인코딩하기
+a = "Life is too short"
+b = a.encode('utf-8')
+b
+
+a = "한글"
+a.encode("ascii")
+
+a = "한글"
+a.encode('euc-kr')
+a.encode('utf-8')
+
+- 디코딩하기
+a = '한글'
+b = a.encode('euc-kr')
+b.decode('euc-kr')
+
+b.decode('utf-8')
+
+- 입출력과 인코딩
+1. euc-kr로 작성된 파일 읽기
+with open('euc-kr.txt', encoding = 'euc-kr') as f:
+  data = f.read()
+
+2. unicode 문자열로 프로그램 수행하기
+data = data + "\n" + "추가 문자열"
+
+3. euc-kr로 수정된 문자열 저장하기
+with open('euc-kr.txt', encoding = 'euc-kr', mode = 'w') as f:
+  f.write(data)
