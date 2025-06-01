@@ -113,3 +113,31 @@ def myfunc():
   print("함수가 실행됩니다")
 
 myfunc()
+
+
+import time
+
+def elapsed(original_func):
+  def wrapper(*args, **kwargs):
+    start = time.time()
+    result = original_func(*args, **kwargs)
+    end = time.time()
+    print("함수 수행 시간: %f초" % (end - start))
+    return result
+  return wrapper
+
+@elapsed
+def myfunc(msg):
+  """ 데코레이터 확인 함수 """
+  print("'%s'을 출력합니다" % msg)
+
+myfunc("You need Python")
+
+# *args와 **kwargs
+func(1,2,3, name = 'foo', age=3)
+
+def func(*args, **kwargs):
+  print(args)
+  print(kwargs)
+
+func(1,2,3, name = 'foo', age =3)
