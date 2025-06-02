@@ -141,3 +141,63 @@ def func(*args, **kwargs):
   print(kwargs)
 
 func(1,2,3, name = 'foo', age =3)
+
+[이터레이터와 제너레이터]
+- 이터레이터란?
+a = [1,2,3]
+next(a)
+
+a = [1,2,3]
+ia = iter(a)
+type(ia)
+
+next(ia)
+next(ia)
+next(ia)
+next(ia)
+
+a = [1,2,3]
+ia = iter(a)
+for i in ia:
+  print(i)
+
+- 이터레이터 만들기
+class MyInterator:
+  def __init__(self, data):
+    self.data = data
+    self.position = 0
+
+  def __iter__(self):
+    return self
+
+  def __next__(self):
+    if self.position >= len(self.data):
+      raise StopIteration
+    result = slef.data[self.position]
+    return result
+
+if __name__ == "__main__":
+  i = MyIterator([1,2,3])
+  for item in i:
+    print(item)
+
+class ReverseItertor:
+  def __init__(self, data):
+    self.data = data
+    self.position = len(self.data) - 1
+
+  def __iter__(self):
+    return self
+
+  def __next__(self):
+    if self.position < 0:
+      raise StopIteration
+    result - self.data[self.position]
+    self.position -= 1
+    return result
+
+if __name__ "__main__":
+  i = ReverseItertor([1,2,3])
+  for item in i:
+    print(item)
+  
