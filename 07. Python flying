@@ -201,3 +201,58 @@ if __name__ "__main__":
   for item in i:
     print(item)
   
+- 제너레이터란?
+def mygen():
+  yield 'a'
+  yield 'b'
+  yield 'c'
+
+g = mygen()
+
+- 제너레이터 표현식
+def mygen():
+  for i in range(1, 1000):
+    result = i * i
+    yield result
+
+gen = mygen()
+
+print(next(gen))
+print(next(gen))
+print(next(gen))
+
+- 제너레이터와 이터레이터
+class MyIterator:
+  def __init__(self):
+    self.data = 1
+
+  def __iter__(self):
+    return self
+
+  def __next__(self):
+    result = self.data * self.data
+    self.data += 1
+    if self.data >= 1000:
+      raise StopIteration
+    return result
+
+- 제너레이터 활용하기
+import time
+
+def longtime_job():
+  print("job start")
+  time.sleep(1)
+  return "done"
+
+list_job = [longtime_job() for i in range(5)]
+print(list_job[0])
+
+import time
+
+def longtime_job():
+  print("job start")
+  time.sleep(1)
+  return "done"
+
+list_job = (longtime_job() for i in range(5))
+print(next_job))
