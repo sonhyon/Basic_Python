@@ -256,3 +256,24 @@ def longtime_job():
 
 list_job = (longtime_job() for i in range(5))
 print(next_job))
+
+
+[파이썬 타입 어노테이션]
+- 동적 언어와 정적 언어
+- 파이썬 타입 어노테이션
+num: int = 1
+
+def add(a: int, b: int) -> int:
+  return a + b
+
+- mypy
+def add(a: int, b: int) -> int:
+  returna a + b
+result add(3, 3.4)
+print(result)
+
+def add(a: int, b: int) -> int:
+  returna a + b
+result add(3, 4)
+print(result)
+
