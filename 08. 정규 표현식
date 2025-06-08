@@ -38,3 +38,57 @@ print(result)
 result = p.finditer("life is too short")
 print(result)
 for r in result: print(r)
+
+- match 객체의 메서드
+m = p.match("python")
+m.group()
+m.start()
+m.end()
+m.span()
+
+m = p.search("3 python")
+m.group()
+m.start()
+m.end()
+m.span()
+
+- 컴파일 옵션
+# DOTALL, S
+import re
+p = re.compile('a.b')
+m = p.match('a\nb')
+print(m)
+
+p = re.compile('a.b', re.DOTALL)
+m = p.match('a\nb')
+print(m)
+
+# IGNORECASE, I
+p = re.compile('[a-z]+', re.I)
+p.match('python')
+p.match('Python')
+p.match('PYTHON')
+
+# MULTILINE, M
+import re
+p = re.compile("^python\s\w+")
+
+data = """python one
+life is too short
+python two
+you need python
+python three"""
+
+print(p.findall(data))
+
+
+import re
+p = re.compile("^python\s\w+", re.MULTILINE)
+
+data = """python one
+life is too short
+python two
+you need python
+python three"""
+
+print(p.findall(data))
