@@ -161,4 +161,44 @@ m = p.search("http://google.com")
 print(m.group())
 
 # 긍정형 전방 탐색
+p = re.compile(".+(?=:)")
+m = p.search("http://google.com")
+print(m.group())
 
+# 부정형 전방 탐색
+- 문자열 바꾸기
+p = re.compile('(blue:while:red)')
+p.sub('colour', 'blue socks and red shoes')
+
+p.sub('colour', 'blue socks and red shoes', count=1)
+
+# sub 메서드와 유사한 subn 메서드
+p = re.compile('(blue:white:red)')
+p.subn('colour', 'blue socks and red shoes')
+
+# sub 메서드 사용 시 참조 구문 사용하기
+p = re.compile(r"(?P<name>\w+)\s+(?<phone>(\d+)[-]\d+[-]\d+)")
+p.subn('colur', 'blue socks and red shoes')
+
+# sub 메서드 사용 시 참조 구문 사용하기
+p = re.compile(r"(?P<name>\w+)\s+(?P<phone>(\d+)[-]\d+[-]\d+)")
+print(p.sub("\g<phone> \g<name>", "park 010-1234-1234"))
+
+p = re.compile(r"(?P<name>\w+)\s+(?P<phone>(\d+)[-]\d+[-]\d+)")
+print(p.sub("\g<2> \g<1>", "park 010-1234-1234"))
+
+# sub 메서드의 매개변수로 함수 넣기
+def hexrepl(match):
+    value = int(match.group())
+    return hex(value)
+
+p = re.compile(r'\d+')
+p.sub(hexrepl, 'Call 65490 for printing, 49152 for user code.')
+
+- greedy와 non-greedy
+s = '<html><head><title>Title</title>'
+len(s)
+print(re.match('<.*>', s).span())
+print(re.match('<.*>', s).group()
+
+print(re.match('<.*?>', s).group())
