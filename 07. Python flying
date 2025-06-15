@@ -1,279 +1,291 @@
 [파이썬과 유니코드]
-#최초의 문자 셋, 아스키코드
-#유니코드의 등장
-#유니코드로 문자열 다루기
-- 인코딩하기
+# 인코딩하기
 a = "Life is too short"
 b = a.encode('utf-8')
-b
+print(b)  # b'Life is too short'
 
 a = "한글"
-a.encode("ascii")
+try:
+    print(a.encode("ascii"))
+except UnicodeEncodeError as e:
+    print("ASCII 인코딩 불가:", e)
 
+print(a.encode('euc-kr'))
+print(a.encode('utf-8'))
+
+# 디코딩하기
 a = "한글"
-a.encode('euc-kr')
-a.encode('utf-8')
-
-- 디코딩하기
-a = '한글'
 b = a.encode('euc-kr')
-b.decode('euc-kr')
+print(b)
+print(b.decode('euc-kr'))
 
-b.decode('utf-8')
+try:
+    print(b.decode('utf-8'))
+except UnicodeDecodeError as e:
+    print("UTF-8 디코딩 실패:", e)
 
-- 입출력과 인코딩
-1. euc-kr로 작성된 파일 읽기
-with open('euc-kr.txt', encoding = 'euc-kr') as f:
-  data = f.read()
+# 파일 입출력과 인코딩 예시
+# 1. euc-kr로 작성된 파일 읽기
+with open('euc-kr.txt', encoding='euc-kr') as f:
+    data = f.read()
 
-2. unicode 문자열로 프로그램 수행하기
+# 2. 유니코드 문자열로 프로그램 수행
 data = data + "\n" + "추가 문자열"
 
-3. euc-kr로 수정된 문자열 저장하기
-with open('euc-kr.txt', encoding = 'euc-kr', mode = 'w') as f:
-  f.write(data)
+# 3. euc-kr로 수정된 문자열 저장
+with open('euc-kr.txt', encoding='euc-kr', mode='w') as f:
+    f.write(data)
 
-- 소스 코드의 인코딩
+# 소스 코드의 인코딩: 보통 파이썬3는 기본 utf-8 사용
 
 
 [클로저와 데코레이터]
-- 클로저란?
+# 클래스 사용 예 (초기 mul 클래스)
 class Mul:
-  def __init__(self, m):
-    self.m = m
-  def mul(self, n):
-    return self.m * n
+    def __init__(self, m):
+        self.m = m
 
-if __name__ == "__main__:
-  mul3 = Mul(3)
-  mul5 = Mul(5)
-
-  print(mul3.mul(10))
-  print(mul5.mul(10))
-
-
-class Mul:
-  def __init__(self, m):
-    self.m = m
-  def __call__(self, n):
-    return self.m * n
-
-if __nmae__ == "__main__":
-  mul3 = Mul(3)
-  mul5 = Mul(5)
-
-  print(mul3(10))
-  print(mul5(10))
-
-
-def mul(m):
-  def wrapper(n):
-    return m * n
-  return wrapper
+    def mul(self, n):
+        return self.m * n
 
 if __name__ == "__main__":
-  mul3 = mul(3)
-  mul5 = mul(5)
+    mul3 = Mul(3)
+    mul5 = Mul(5)
 
-  print(mul3(10))
-  print(mult(10))
+    print(mul3.mul(10))  # 30
+    print(mul5.mul(10))  # 50
 
-- 데코레이터란?
+
+# __call__ 메서드를 통한 호출 가능 객체
+class Mul:
+    def __init__(self, m):
+        self.m = m
+
+    def __call__(self, n):
+        return self.m * n
+
+if __name__ == "__main__":
+    mul3 = Mul(3)
+    mul5 = Mul(5)
+
+    print(mul3(10))  # 30
+    print(mul5(10))  # 50
+
+
+# 클로저로 구현한 mul 함수
+def mul(m):
+    def wrapper(n):
+        return m * n
+    return wrapper
+
+if __name__ == "__main__":
+    mul3 = mul(3)
+    mul5 = mul(5)
+
+    print(mul3(10))  # 30
+    print(mul5(10))  # 50
+
+
+# 데코레이터 예제
 import time
 
 def elapsed(original_func):
-  def wrapper():
-    start = time.time()
-    result = original_func()
-    end = time.time()
-    print("함수 수행 시간: %f초" % (end - start))
-    return result
-  return wrapper
+    def wrapper():
+        start = time.time()
+        result = original_func()
+        end = time.time()
+        print("함수 수행 시간: %f초" % (end - start))
+        return result
+    return wrapper
 
 def myfunc():
-  print("함수가 실행됩니다")
+    print("함수가 실행됩니다")
 
-decorated_myfunc = elapsed (myfunc)
+decorated_myfunc = elapsed(myfunc)
 decorated_myfunc()
 
 
+# 데코레이터 문법 sugar (@)
 import time
 
 def elapsed(original_func):
-  def wrapper():
-    start = time.time()
-    result = original_func()
-    end = time.time()
-    print("함수 수행 시간: %f초" % (end = start))
-    return result
-  return wrapper
+    def wrapper():
+        start = time.time()
+        result = original_func()
+        end = time.time()
+        print("함수 수행 시간: %f초" % (end - start))
+        return result
+    return wrapper
 
 @elapsed
 def myfunc():
-  print("함수가 실행됩니다")
+    print("함수가 실행됩니다")
 
 myfunc()
 
 
+# 인자 받는 함수에 적용 가능한 데코레이터
 import time
 
 def elapsed(original_func):
-  def wrapper(*args, **kwargs):
-    start = time.time()
-    result = original_func(*args, **kwargs)
-    end = time.time()
-    print("함수 수행 시간: %f초" % (end - start))
-    return result
-  return wrapper
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = original_func(*args, **kwargs)
+        end = time.time()
+        print("함수 수행 시간: %f초" % (end - start))
+        return result
+    return wrapper
 
 @elapsed
 def myfunc(msg):
-  """ 데코레이터 확인 함수 """
-  print("'%s'을 출력합니다" % msg)
+    """ 데코레이터 확인 함수 """
+    print("'%s'을 출력합니다" % msg)
 
 myfunc("You need Python")
 
-# *args와 **kwargs
-func(1,2,3, name = 'foo', age=3)
-
+# *args, **kwargs 사용 예
 def func(*args, **kwargs):
-  print(args)
-  print(kwargs)
+    print(args)
+    print(kwargs)
 
-func(1,2,3, name = 'foo', age =3)
+func(1, 2, 3, name='foo', age=3)
 
 [이터레이터와 제너레이터]
-- 이터레이터란?
-a = [1,2,3]
-next(a)
+# 이터레이터란?
+a = [1, 2, 3]
+# next(a) # TypeError 발생 (list는 이터레이터 아님)
 
-a = [1,2,3]
-ia = iter(a)
-type(ia)
+ia = iter(a)  # 리스트로부터 이터레이터 생성
+print(type(ia))  # <class 'list_iterator'>
 
-next(ia)
-next(ia)
-next(ia)
-next(ia)
+print(next(ia))  # 1
+print(next(ia))  # 2
+print(next(ia))  # 3
+# print(next(ia)) # StopIteration 발생
 
-a = [1,2,3]
+# 이터레이터 사용 예
 ia = iter(a)
 for i in ia:
-  print(i)
+    print(i)
 
-- 이터레이터 만들기
-class MyInterator:
-  def __init__(self, data):
-    self.data = data
-    self.position = 0
 
-  def __iter__(self):
-    return self
+# 직접 이터레이터 만들기
+class MyIterator:
+    def __init__(self, data):
+        self.data = data
+        self.position = 0
 
-  def __next__(self):
-    if self.position >= len(self.data):
-      raise StopIteration
-    result = slef.data[self.position]
-    return result
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.position >= len(self.data):
+            raise StopIteration
+        result = self.data[self.position]
+        self.position += 1
+        return result
 
 if __name__ == "__main__":
-  i = MyIterator([1,2,3])
-  for item in i:
-    print(item)
+    i = MyIterator([1, 2, 3])
+    for item in i:
+        print(item)
 
-class ReverseItertor:
-  def __init__(self, data):
-    self.data = data
-    self.position = len(self.data) - 1
 
-  def __iter__(self):
-    return self
+# 역방향 이터레이터
+class ReverseIterator:
+    def __init__(self, data):
+        self.data = data
+        self.position = len(self.data) - 1
 
-  def __next__(self):
-    if self.position < 0:
-      raise StopIteration
-    result - self.data[self.position]
-    self.position -= 1
-    return result
+    def __iter__(self):
+        return self
 
-if __name__ "__main__":
-  i = ReverseItertor([1,2,3])
-  for item in i:
-    print(item)
-  
-- 제너레이터란?
+    def __next__(self):
+        if self.position < 0:
+            raise StopIteration
+        result = self.data[self.position]
+        self.position -= 1
+        return result
+
+if __name__ == "__main__":
+    i = ReverseIterator([1, 2, 3])
+    for item in i:
+        print(item)
+
+
+# 제너레이터란?
 def mygen():
-  yield 'a'
-  yield 'b'
-  yield 'c'
+    yield 'a'
+    yield 'b'
+    yield 'c'
 
 g = mygen()
+print(next(g))
+print(next(g))
+print(next(g))
+# print(next(g)) # StopIteration
 
-- 제너레이터 표현식
+
+# 제너레이터 표현식 (함수)
 def mygen():
-  for i in range(1, 1000):
-    result = i * i
-    yield result
+    for i in range(1, 1000):
+        yield i * i
 
 gen = mygen()
-
 print(next(gen))
 print(next(gen))
 print(next(gen))
 
-- 제너레이터와 이터레이터
+
+# 제너레이터와 이터레이터 직접 구현 비교
 class MyIterator:
-  def __init__(self):
-    self.data = 1
+    def __init__(self):
+        self.data = 1
 
-  def __iter__(self):
-    return self
+    def __iter__(self):
+        return self
 
-  def __next__(self):
-    result = self.data * self.data
-    self.data += 1
-    if self.data >= 1000:
-      raise StopIteration
-    return result
+    def __next__(self):
+        result = self.data * self.data
+        self.data += 1
+        if self.data >= 1000:
+            raise StopIteration
+        return result
 
-- 제너레이터 활용하기
+
+# 제너레이터 활용 예시
 import time
 
 def longtime_job():
-  print("job start")
-  time.sleep(1)
-  return "done"
+    print("job start")
+    time.sleep(1)
+    return "done"
 
-list_job = [longtime_job() for i in range(5)]
+# 리스트 컴프리헨션: 5초 이상 소요
+list_job = [longtime_job() for _ in range(5)]
 print(list_job[0])
 
-import time
-
-def longtime_job():
-  print("job start")
-  time.sleep(1)
-  return "done"
-
-list_job = (longtime_job() for i in range(5))
-print(next_job))
+# 제너레이터 표현식: 한 번에 한 개씩 처리
+list_job = (longtime_job() for _ in range(5))
+print(next(list_job))
 
 
 [파이썬 타입 어노테이션]
-- 동적 언어와 정적 언어
-- 파이썬 타입 어노테이션
+# 변수 타입 어노테이션
 num: int = 1
 
 def add(a: int, b: int) -> int:
-  return a + b
+    return a + b
 
-- mypy
-def add(a: int, b: int) -> int:
-  returna a + b
-result add(3, 3.4)
+# 타입 어노테이션이 있어도 동작에는 영향 없음 (파이썬은 동적 타입)
+result = add(3, 3)
 print(result)
 
-def add(a: int, b: int) -> int:
-  returna a + b
-result add(3, 4)
-print(result)
+# mypy 같은 타입 검사 도구로 체크 가능
 
+# 잘못된 예제 수정
+def add(a: int, b: int) -> int:
+    return a + b
+
+result = add(3, 4)
+print(result)
