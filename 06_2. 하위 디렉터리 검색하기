@@ -1,0 +1,57 @@
+1. 기본 함수 작성 (디렉터리 이름 출력)
+def search(dirname):
+    print(dirname)
+
+search("c:/")
+
+2. 디렉터리에 있는 파일 이름 출력 (os.listdir 사용)
+import os
+
+def search(dirname):
+    filenames = os.listdir(dirname)
+    for filename in filenames:
+        full_filename = os.path.join(dirname, filename)  # 오타: dirname으로 수정
+        print(full_filename)
+
+search("c:/")
+
+3. .py 확장자 파일만 출력하도록 필터링
+import os
+
+def search(dirname):
+    filenames = os.listdir(dirname)
+    for filename in filenames:
+        full_filename = os.path.join(dirname, filename)
+        ext = os.path.splitext(full_filename)[-1]
+        if ext == '.py':
+            print(full_filename)
+
+search("c:/")
+
+4. 하위 디렉터리도 재귀적으로 탐색하도록 변경 (예외 처리 포함)
+import os
+
+def search(dirname):
+    try:
+        filenames = os.listdir(dirname)
+        for filename in filenames:
+            full_filename = os.path.join(dirname, filename)  # dirname 변수명 오타 수정
+            if os.path.isdir(full_filename):
+                search(full_filename)  # 하위 폴더 재귀 호출
+            else:
+                ext = os.path.splitext(full_filename)[-1]
+                if ext == '.py':
+                    print(full_filename)
+    except PermissionError:
+        pass
+
+search("c:/")
+
+5. os.walk를 활용한 하위 디렉터리 전체 탐색 예제 (더 간결)
+import os
+
+for (path, dirnames, filenames) in os.walk("c:/"):
+    for filename in filenames:
+        ext = os.path.splitext(filename)[-1]
+        if ext == '.py':
+            print(f"{path}/{filename}")
