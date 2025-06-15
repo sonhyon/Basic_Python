@@ -1,41 +1,67 @@
-- 활용법1. 오류의 원인 파악하기
-  money = True
+✅ 파이썬 활용법 정리
+📌 활용법 1. 오류의 원인 파악하기
+money = True
+if money:
+    print("택시를")
+print("타고")
+print("가라")
+
+🔍 잘못된 예시
+money = True
 if money:
   print("택시를")
 print("타고")
-  print("가라")
+  print("가라")  # IndentationError 발생
 
-- 활용법2. 작성한 코드 점검하기
-input1 = input("첫 번째 숫자를 입력하세요:")
-input2 = input("두 번째 숫자를 입력하세요:")
 
-total = innput1 + input2
-print("두 수의 합은 %s 입니다" % total)
+📌 활용법 2. 작성한 코드 점검하기
+input1 = input("첫 번째 숫자를 입력하세요: ")
+input2 = input("두 번째 숫자를 입력하세요: ")
 
-- 활용법3. 코드의 품질 개선하기
-f1 = open("test.txt", 'w')
-f1.write("Life is too short!")
-f1.colse()
+total = int(input1) + int(input2)
+print("두 수의 합은 %s입니다." % total)
 
-f2 = open("test.txt", 'r')
-print(f2.read())
-f2.close()
+🔍 잘못된 예시
+total = innput1 + input2  # 오타: 'innput1'
 
-- 활용법4. 이해하기 어려운 코드에 주석 달기
+
+📌 활용법 3. 코드의 품질 개선하기
+with open("test.txt", 'w') as f1:
+    f1.write("Life is too short!")
+
+with open("test.txt", 'r') as f2:
+    print(f2.read())
+
+🔍 잘못된 예시
+f1.colse()  # 오타: close()
+
+
+📌 활용법 4. 이해하기 어려운 코드에 주석 달기
 def chk_dup_numbers(s):
-  result = []
-  for num in s:
-    if num not in result:
-      result.append(num)
-    else:
-      return False
-  return len(result) == 10
+    result = []  # 중복되지 않은 숫자를 저장할 리스트
+    for num in s:
+        if num not in result:
+            result.append(num)  # 처음 보는 숫자면 추가
+        else:
+            return False        # 중복된 숫자면 False 반환
+    return len(result) == 10    # 총 10개의 숫자가 있는지 확인
 
-- 활용법5. 코드의 해석 요청하기
+
+📌 활용법 5. 코드의 해석 요청하기
 import re
-
 p = re.compile("a[.]{3,}b")
 
-- 활용법6. 기능 구현 의뢰하기
-두 날짜의 차이를 구할 수 있는 파이썬 라이브러리를 알려 주고 예제도 보여 줘
-  
+print(p.search("a...b"))     # 매치됨
+print(p.search("a.....b"))   # 매치됨
+print(p.search("a..b"))      # 매치되지 않음
+
+
+📌 활용법 6. 기능 구현 의뢰하기
+📅 두 날짜의 차이 계산하기
+from datetime import datetime
+
+date1 = datetime.strptime("2024-06-01", "%Y-%m-%d")
+date2 = datetime.strptime("2025-06-15", "%Y-%m-%d")
+
+delta = date2 - date1
+print(f"날짜 차이는 {delta.days}일입니다.")
