@@ -1,453 +1,202 @@
-#클래스
+[파이썬 클래스 & 객체지향]
+-기본 클래스 구조
 class Calculator:
-  def __init__(self):
-    self.result = 0
-  def add(self, num):
-    self.result += num
-    return self.result
+    def __init__(self):
+        self.result = 0
+    def add(self, num):
+        self.result += num
+        return self.result
 
 cal1 = Calculator()
-cal2 = Calculator()
+print(cal1.add(3))  # 3
 
-print(cal1.add(3))
-print(cal2.add(3))
-
-#사칙연산 클래스 만들기
-a = FourCal()
-a = setdata(4,2) #4와 2를 a에 저장
-
-a.add() #덧셈
-a.mul() #곱
-a.sub() #뺄셈
-a.div() #나누기
-
+-사칙연산 클래스 예제
 class FourCal:
-  def setdata(self, first, second):
-      self.first = first
-      self.second = second
+    def setdata(self, first, second):
+        self.first = first
+        self.second = second
 
+    def add(self):
+        return self.first + self.second
+
+    def sub(self):
+        return self.first - self.second
+
+    def mul(self):
+        return self.first * self.second
+
+    def div(self):
+        return self.first / self.second
+
+a = FourCal()
 a.setdata(4, 2)
-a.frist
+print(a.add())  # 6
+print(a.mul())  # 8
 
-#더하기 기능 만들기
+-생성자 __init__
 class FourCal:
-  def setdata(self, first, second):
-      self.first = first
-      self.second = second
-  def add(self):
-      result = self.first + self.second
-      return result
+    def __init__(self, first, second):
+        self.first = first
+        self.second = second
 
-a = FourCal()
-a.setdata(4,2)
-a.add()
+a = FourCal(4, 2)
+print(a.add())
 
-#곱하기, 빼기, 나누기 기능 만들기
-class FourCal:
-  def setdata(self, first, second):
-      self.first = first
-      self.second = second
-  def add(self):
-      result = self.first + self.second
-      return result
-  def add(self):
-      result = self.first * self.second
-      return result
-  def add(self):
-      result = self.first - self.second
-      return result
-  def add(self):
-      result = self.first / self.second
-      return result
-
-a = FourCal()
-b = FourCal()
-a.setdata(4, 2)
-b.setdata(3, 8)
-
-#생성자 : 객체가 생성될 때 자동으로 호출되는 메서드를 의미
-class FourCal:
-  def __init__(self, first, second):
-      self.first = first
-      self.second = second
-*__init__메서드는 setdata 메서드와 이름만 다르고 모든 게 동일하다
-
-#클래스의 상속
+-상속 & 메서드 오버라이딩
 class MoreFourCal(FourCal):
-  pass
+    def pow(self):
+        return self.first ** self.second
 
-a = MoreFourCal(4,2)
-a.add() #상속받은 FourCal 클래스의 기능을 모두 사용할 수 있다
-a.mul()
-a.sub()
-a.div()
-
-class MoreFourCal(FourCal):
-  def pow(self):
-    result = self.first ** self.second
-    return result
-
-a = MoreFourCal(4,2)
-a.pow()
-
-#메서드 오버라이딩
-- 부모 클래스에 있는 메서드를 동일한 이름으로 다시 만드는 것
-class SafeFourcal(FourCal):
-  def div(self):
-    if self.second == 0:
-      return 0
-    else:
-      return self.first/self.second
+class SafeFourCal(FourCal):
+    def div(self):
+        if self.second == 0:
+            return 0
+        else:
+            return self.first / self.second
 
 a = SafeFourCal(4, 0)
-a.div()
+print(a.div())  # 0
 
-#클래스 변수
+-클래스 변수와 인스턴스 변수
 class Family:
-  lastname = '김'
+    lastname = '김'  # 클래스 변수
 
-Family.lastname
+print(Family.lastname)  # '김'
 
-- 클래스변수는 객체변수와 달리 클래스로 만든 모든 객체에 공유된다는 특징이 있다
-*클래스변수와 동일한 이름의 객체변수를 생성하면?
+fam = Family()
+fam.lastname = '박'  # 인스턴스 변수 (객체별 별도 저장)
+print(fam.lastname)  # '박'
+print(Family.lastname)  # '김'
 
 
-[모듈]
-- 파일 mod1.py를 만들고 디렉터리에 저장 -> mod1.py 파일이 바로 모듈이다
-
-#모듈 불러오기
-- 명령 프롬프트 창을 열고 mod1.py를 저장한 디렉터리로 이동한 후 대화형 인터프리터를 실행
+[모듈과 패키지]
+-모듈 만들기 및 불러오기
+mod1.py에 함수 정의
+불러오기
 
 import mod1
 print(mod1.add(3, 4))
-print(mod1.sub(4, 2))
-- import는 이미 만들어 놓은 파이썬 모듈을 사용할 수 있게 해 주는 명령어이다
-import 모듈_이름
-from 모듈_이름 import 모듈_함수
 
-from mod1 import add
-from mod1 inport add, sub
-from mod1 import *           #mod1 모듈의 모든 함수를 불러와 사용하겠다는 뜻
+from mod1 import add, sub
+print(add(3, 4))
 
-# if__name__=="__main__":의 의미
-if__name__=="__main__"을 사용하면 직접 파일을 실행했을 때는 __name__=="__main__"이 참이 되어 if문 다음 문장이 수행된다
+if __name__ == "__main__":
+직접 실행 시에만 실행되는 코드 작성용
+if __name__ == "__main__":
+    print("직접 실행되었습니다.")
 
-#클래스나 변수 등을 포함한 모듈
-PI = 3.141592
-
-class Math:
-  def solv(self, r):
-    return PI * (r ** 2)
-
-def add(a, b):
-  return a + b
-
-#다른 파일에서 모듈 불러오기
-import mod2
-result = mod2.add(3,4)
-print(result)
-*위 예제가 정상적으로 실행되기 위해서는 modtest.py 파일과 mod2.py 파일이 동일한 디렉터리에 있어야 한다
-
-#다른 디렉터리에 있는 모듈을 불러오는 방법
-#sys.path.append 사용하기
-import sys #파이썬 라이브러리가 설치되어 있는 디렉터리를 확인할 수 있다
-sys.path #디렉터리 목록을 보여준다
+-다른 디렉터리에 있는 모듈 불러오기
+import sys
 sys.path.append("C:/doit/mymod")
-sys.path
-
 import mod2
-print(mod2.add(3,4))
 
-#PYTHONPATH 환경 변수 사용하기
-C:\doit>set PYTHONPATH=C:\doit\mymod
-C:\doit>python
-import mod2
-print(mod2.add(3,4))
-
-[패키지]
-#가상의 game 패키지 예
+-패키지 구조
 game/
   __init__.py
   sound/
     __init__.py
     echo.py
-    wav.py
   graphic/
     __init__.py
-    screen.py
     render.py
-  play/
-    __init__.py
-    run.py
-    test.py
-
-#패키지 만들기
-1. 디렉터리 밑에 game 및 기타 서브 디렉터리를 생성하고 .py파일들을 다음과 같이 만들기
-c:/doit/game/__init__.py
-c:/doit/game/sound/__init__.py
-c:/doit/game/sound/echo.py
-c:/doit/game/graphic/__init__.py
-c:/doit/game/graphic/render.py
-
-2. 각 디렉터리에 __init__.py파일을 만들어 놓기
-
-3. echo.py 파일의 내용은 다음과 같이 작성
-def echo_test():
-  print("echo")
-
-4. render.py 파일의 내용은 다음과 같이 작성
-def render_test():
-  print("render")
-
-5. 명령 프롬프트 창에서 set 명령어로 PYTHONPATH 환경 변수에 디렉터리를 추가
-C:\>set PYTHONPATH=C:/doit
-C:\>python
-
-#패키지 안의 함수 실행하기
-
-#__init__.py의 용도
-
-#패키지 변수 및 함수 정의
-VERSION = 3.5
-
-def print_version_info():
-  print(f"The version of this game is {VERSION}.")
-
-#패키지 내 모듈을 미리 import
-from .graphic.render import render_test
-
-VERSION = 3.5
-
-def print_version_info():
-  print(f"The version of this game is {VERSION}.")
-
-#패키지 초기화
-from .graphic.render import render_test
-
-VERSION = 3.5
-
-def print_version_info():
-  print(f"The version of this game is {VERSION}.")
-
-*여기에 패키지 초기화 코드를 작성한다
-print("INitializing game ...")
-
-#__all__
-
-#relative 패키지
-from game.sound.echo import echo_test
-def render_test():
-  print("render")
-  echo_test()
-
-from ..sound.echo import echo_test
-def render_test():
-  print("render")
-  echo_test()
+(__init__.py는 패키지 초기화 파일로, 패키지 초기화 코드, 변수, 함수, 모듈 import 등을 작성)
 
 
 [예외 처리]
-#오류는 언제 발생하는가?
-#오류 예외 처리 기법
-- try-except 문
+-기본 try-except
 try:
-  4/0
-except ZeroDivisionError as e:
-  print(e)
-
-- try-finally 문
-try:
-  f = open('foo.txt', 'w')
-  #무언가를 수행
-
-finally:
-  f.close() #중간에 오류가 발생하더라도 무조건 실행
-
-- 여러 개의 오류 처리하기
-try:
-  a = [1,2]
-  print(a[3])
-  4 / 0
+    4 / 0
 except ZeroDivisionError:
-  print("0으로 나눌 수 없습니다")
+    print("0으로 나눌 수 없습니다")
+
+-여러 예외 처리
+try:
+    a = [1, 2]
+    print(a[3])
+    4 / 0
+except ZeroDivisionError:
+    print("0으로 나눌 수 없습니다")
 except IndexError:
-  print("인덱싱할 수 없습니다")
+    print("인덱싱할 수 없습니다")
 
-try:
-  a = [1,2]
-  print(a[3])
-  4/0
-except ZeroDivisionError as e:
-  print(e)
-except IndexError as e:
-  print(e)
-
-try:
-  a = [1,2]
-  print(a[3])
-  4/0
-except (ZeroDivisionError, IndexError) as e:
-  print(e)
-
-#try-else 문
-try:
-  age = int(input('나이를 입력하세요: '))
-except:
-  print('입력이 정확하지 않습니다')
-else:
-  if age <= 18:
-    print('미성년자는 출입금지입니다')
-  else:
-    print('환영합니다')
-
-#오류 회피하기
-try:
-  f = open('나없는 파일", r)
-except FileNoFoundError:
-  pass
-
-#오류 일부러 발생시키기
-class Bird:
-  def fly(self):
-    raise NotImplementedError
-
-class Eagle(Bird):
-  pass
-eagle = Eagle()
-eagle.fly()
-
-Clsss Eagle(Bird):
-  def fly(self):
-    print("very fast")
-eagle = Eagle()
-eagle.fly()
-
-#예외 만들기
+-예외 발생시키기 (raise)
 class MyError(Exception):
-  pass
+    pass
 
 def say_nick(nick):
-  if nick == '바보':
-    raise MyError()
-  print(nick)
-
-say_nick("천사")
-say_nick("바보")
+    if nick == '바보':
+        raise MyError("허용되지 않는 별명입니다")
+    print(nick)
 
 try:
-  say_nick("천사")
-  say_nick("바보")
-except MyError:
-  print("허용되지 않는 별명입니다")
-
-try
-  sick_nick("천사")
-  sick_nick("바보")
+    say_nick("천사")
+    say_nick("바보")
 except MyError as e:
-  print(e)
-
-class MyError(Exception):
-  def __str__(self):
-    return "허용되지 않는 별명입니다"
+    print(e)
 
 
-[내장 함수]
-abs() #절대값
-all([1,2,3]) #모든 요소가 참이므로 True를 리턴
-any([1,2,3,0]) #요소 중 하나라도 참이라면 True 리턴
-chr(97) #유니코드 숫자 값을 입력받아 그 코드에 해당하는 문자를 리턴
-dir([1,2,3]) #객체가 지닌 변수나 함수를 보여준다
-divmod(7,3) #몫과 나머지를 리턴
-enumerate(['body', 'foo', 'bar']):    #인덱스 값과 함께 데이터를 출력
-eval('1 + 2') #문자열로 구성된 표현식을 입력받아 해당 문자열을 실행한 결과값을 리턴
-filter(함수, 반복 가능한 데이터)
-hex(234) #정수를 입력받아 16진수 문자열로 변환
-id(3) #객체의 고유 주솟값을 리턴
-input() #사용자 입력을 받는 함수
-int(x) #문자열 형태의 숫자나 소수점이 있는 숫자를 정수로 리턴
-isinstance(object, class) #첫 번째 인수는 객체, 두 번째 인수로 클래스를 받는다
-len() #입력값의 길이를 리턴
-list() #리스트로 만들어버리는 리턴
-map(f, iterable) #함수(f)와 반복 가능한 데이터를 이력으로 받는다
-max() #최대값 리턴
-min() #최솟값 리턴
-oct() #정수를 8진수 문자열로 바꿔 리턴
-open("binary_file", "rb")
-#w - 쓰기모드로 파일 열기
-#r - 읽기모드로 파일 열기
-#a - 추가모드로 파일 열기
-#b - 바이너리 모드로 파일 열기
-ord() #문자의 유니코드 숫자 값을 리턴
-pow(2, 4) #x를 y제곱값을 리턴하는 함수
-range
-- list(range(5)) #인자가 하나일 경우
-- list(range(5, 10)) #인수가 2개일 경우
-- list(range(1, 10, 2)) #인수가 3개일 경우
-round() #반올림 함수
-sorted() #데이털 정렬 후 리스트로 리턴
-str() #문자열 형태로 객체를 변환
-sum() #입력 데이터의 합을 리턴
-taple() #튜플로 바꾸어 리턴
-type() #자료형이 무엇인지 알려주는 함수
-zip() #동일한 개수로 이루어진 데이터들을 묶어서 리턴
+[내장 함수 주요 정리]
+abs(x): 절대값
+all(iterable): 모든 요소가 참이면 True
+any(iterable): 하나라도 참이면 True
+chr(i): 유니코드 정수 → 문자
+dir(obj): 객체의 변수와 함수 리스트
+divmod(a, b): (몫, 나머지) 튜플 반환
+enumerate(iterable): 인덱스 포함 반복자 반환
+eval(str): 문자열 코드 실행 결과 반환
+filter(func, iterable): 함수 조건 만족하는 요소 필터링
+hex(x): 16진수 문자열
+id(obj): 객체 고유 주소값
+input(): 사용자 입력 받기
+int(x): 정수 변환
+isinstance(obj, class): 객체가 특정 클래스인지 검사
+len(obj): 길이 반환
+list(iterable): 리스트 변환
+map(func, iterable): 함수 적용 반복자 반환
+max(iterable), min(iterable): 최대, 최소
+oct(x): 8진수 문자열
+ord(c): 문자 → 유니코드 정수
+pow(x, y): x의 y제곱
+range(): 숫자 범위 생성
+round(x): 반올림
+sorted(iterable): 정렬된 리스트 반환
+str(obj): 문자열 변환
+sum(iterable): 합계
+tuple(iterable): 튜플 변환
+type(obj): 객체 타입 반환
+zip(*iterables): 여러 반복자 묶기
 
 
-[표준 라이브러리]
-#datetime.date
+[표준 라이브러리 주요 예]
+-datetime
 import datetime
+
 day1 = datetime.date(2021, 12, 14)
 day2 = datetime.date(2023, 4, 5)
 
 diff = day2 - day1
-diff.days
+print(diff.days)  # 일수 차이
+print(day1.weekday())  # 요일 (월=0)
+print(day1.isoweekday())  # 요일 (월=1)
 
-day = datetime.date(2021, 12, 14)
-day.weekday()
+-time
+time.time(), time.localtime(), time.sleep() 등
 
-day.isoweekday() #요일
+-math
+math.gcd(x, y): 최대공약수
+math.lcm(x, y): 최소공배수
 
-#time
-time.time()
-time.localtime()
-time.asctime()
-time.ctime()
-time.strftime()
-time.sleep()
-
-#math.gcd
-math.gcd() #최대공약수
-math.lcm() #최소공배수
-random() #난수 생성
-
-#itertools.zip_longest
-#itertools.permutation
-#itertools.combination
-#functools.reduce
-#operator.itemgetter
-#shutil
-#glob
-#pickle
-
-#os
-내 시스템의 환경 변숫값을 알고 싶을 때 - os.environ
-디렉터리 위치 변경하기 - os.chdir
-디렉터리 위치 돌려받기 - os.getcwd
-시스템 명령어 호출하기 - os.system 
-실행한 시스템 명령어의 결괏값 돌려받기 - os.popen
-
-#zipfile
-#threading
-#tempfile
-#traceback
-#json
-#urllib
-#webbrowser
+-os
+os.environ: 환경변수
+os.chdir(path): 작업 디렉터리 변경
+os.getcwd(): 현재 작업 디렉터리 반환
+os.system(cmd): 시스템 명령 실행
 
 
-[외부 라이브러리]
-#pip install
-#pip uninstall
-- 특정 버전으로 설치하기
-- 최신 버전으로 업그레이드하기
-- 설치된 패키지 확인하기
-#Faker
+[외부 라이브러리 및 pip]
+
+설치: pip install package_name
+제거: pip uninstall package_name
+특정 버전 설치: pip install package_name==1.0
+업그레이드: pip install --upgrade package_name
+설치 목록 확인: pip list
