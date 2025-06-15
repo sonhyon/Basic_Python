@@ -1,96 +1,68 @@
-[구구단 2단]
+1. [구구단 2단]
 def gugu(n):
-  result = []
-  i = 1
-  while i < 10:
-    result.append(n*i)
-    i = I + 1
-  result result
+    result = []
+    i = 1
+    while i < 10:
+        result.append(n * i)
+        i = i + 1  # I -> i, 대소문자 주의
+    return result  # result result -> return result
 
 print(gugu(2))
 
-[3과 5의 배수를 모두 더하기]
+2. [3과 5의 배수를 모두 더하기]
 result = 0
 for n in range(1, 1000):
-  if n % 3 == 0 or n % 5 == 0:
-    result += n
+    if n % 3 == 0 or n % 5 == 0:
+        result += n
 print(result)
 
-******************코딩 연습을 할 수 있는 사이트 : 프로젝트 오릴러*******************
-
-[게시판 페이징하기]
-def get_total_page(m, n);
-  return m // n + 1
-print(get_total_page(5,10))
-print(get_total_page(15,10))
-print(get_total_page(25,10))
-print(get_total_page(30,10))
-
+3. [게시판 페이징하기]
 def get_total_page(m, n):
-  if m % n == 0:
-    return m // n
-  else:
+    # 잘못된 세미콜론(: 대신 ;) 수정
     return m // n + 1
-print(get_total_page(5,10))
-print(get_total_page(15,10))
-print(get_total_page(25,10))
-print(get_total_page(30,10))
 
+print(get_total_page(5, 10))   # 1
+print(get_total_page(15, 10))  # 2
+print(get_total_page(25, 10))  # 3
+print(get_total_page(30, 10))  # 4
 
-[간단한 메모장 만들기]
+(아래는 페이지 수를 정확히 계산하는 함수 (나누어떨어질 때 +1 안 하는 버전))
+def get_total_page(m, n):
+    if m % n == 0:
+        return m // n
+    else:
+        return m // n + 1
+
+print(get_total_page(5, 10))   # 1
+print(get_total_page(15, 10))  # 2
+print(get_total_page(25, 10))  # 3
+print(get_total_page(30, 10))  # 3
+
+4. [간단한 메모장 만들기]
 import sys
 
 option = sys.argv[1]
-memo = sys.argv[2]
-print(option)
-print(memo)
-
-import sys
-opiton = sys.argv[1]
 
 if option == '-a':
-  memo = sys.argv[2]
-  f = open('memo.txt', 'a')
-  f.write(memo)
-  f.write('\n')
-  f.close()
+    memo = sys.argv[2]
+    with open('memo.txt', 'a') as f:
+        f.write(memo + '\n')
 
-import sys
-option = sys.argv[1]
-
-if option == '-a':
-  memo = sys.argv[2]
-  f = open('memo.txt', 'a')
-  f.write(memeo)
-  f.write('\n')
-  f.close()
 elif option == '-v':
-  f = open('memo.txt')
-  memo = f.read()
-  f.close()
-  print(memo)
+    with open('memo.txt', 'r') as f:
+        memo = f.read()
+    print(memo)
 
-
-[탭 문자를 공백 문자 4개로 바꾸기]
+5. [탭 문자를 공백 문자 4개로 바꾸기]
 import sys
 
 src = sys.argv[1]
 dst = sys.argv[2]
 
-print(src)
-print(dst)
+with open(src, 'r') as f:
+    tab_content = f.read()
 
-import sys
+space_content = tab_content.replace("\t", " " * 4)
 
-src = sys.argv[1]
-dst = sys.argv[2]
-
-f = open(src)
-tab_content = f.read()
-f.close()
-
-space_content = tab_content.replace("\t|, | | * 4)
-
-f = open(dst, 'w')
-f.write(space_content)
-f.close()
+with open(dst, 'w') as f:
+    f.write(space_content)
